@@ -42,7 +42,10 @@ const Landing = () => {
             </div>
           </div>
 
-          <div className="w-full cursor-pointer bg-black h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center">
+          <div
+            className="w-full cursor-pointer bg-black h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
+            onClick={() => navigate("/registration-listener")}
+          >
             <div className="flex justify-center mt-20 mb-10">
               <Mic />
             </div>
