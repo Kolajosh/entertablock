@@ -5,20 +5,29 @@ import { TextInput } from "../../../../components/reusables/TextInput";
 import { CustomButton } from "../../../../components/buttons/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import useRegistration from "./hooks/useRegistration";
 
 const RegisterAsArtist = () => {
+  const { handleRegister, loading } = useRegistration();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      emailAddress: "",
+      email: "",
       firstName: "",
       lastName: "",
       stageName: "",
       password: "",
     },
+
+    onSubmit: async (values) => {
+      console.log(values);
+      await handleRegister({
+        values,
+      });
+    },
   });
 
-  const { handleChange, values } = formik;
+  const { handleChange, values, handleSubmit } = formik;
   return (
     <>
       <div className="grid grid-cols-1 font-jarkata md:grid-cols-2">
@@ -36,39 +45,56 @@ const RegisterAsArtist = () => {
         </div>
 
         <div className="w-full text-left h-screen flex justify-center items-center text-white bg-[#1E1E1E]">
-          <form className="space-y-5 w-7/12">
+          <div className="space-y-5 w-7/12">
             <div className="text-2xl font-bold">Register as an Artist</div>
             <div>
               <TextInput
+                name="email"
                 label="Email Address"
                 placeHolder="Email Address"
                 handleChange={handleChange}
+                value={values?.email}
               />
             </div>
             <div className="grid grid-cols-2 gap-5">
               <TextInput
+                name="firstName"
                 label="First Name"
                 placeHolder="First Name"
                 handleChange={handleChange}
+                value={values?.firstName}
               />
               <TextInput
+                name="lastName"
                 label="Last Name"
                 placeHolder="Last Name"
                 handleChange={handleChange}
+                value={values?.lastName}
               />
-            </div>
-            <div>
-              <TextInput label="Stage Name" handleChange={handleChange} />
             </div>
             <div>
               <TextInput
-                type="password"
-                label="Password"
+                name="stageName"
+                label="Stage Name"
                 handleChange={handleChange}
+                value={values?.stageName}
               />
             </div>
             <div>
-              <CustomButton labelText={"Register"} buttonVariant="primary" />
+              <TextInput
+                name="password"
+                type="password"
+                label="Password"
+                handleChange={handleChange}
+                value={values?.password}
+              />
+            </div>
+            <div className="block" onClick={() => handleSubmit()}>
+              <CustomButton
+                labelText={"Register"}
+                buttonVariant="primary"
+                isDisabled={loading}
+              />
             </div>
             <div>
               Already have an account?{" "}
@@ -84,7 +110,7 @@ const RegisterAsArtist = () => {
               By signing up you accept our{" "}
               <span className="text-[#FF0202]">terms and condition</span>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

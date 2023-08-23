@@ -4,6 +4,7 @@ import Hero from "../../assets/img/landing.png";
 import { ReactComponent as Logo } from "../../assets/svg/Logo.svg";
 import { ReactComponent as Scroll } from "../../assets/svg/Scroll.svg";
 import { ReactComponent as Mic } from "../../assets/svg/ep_mic.svg";
+import { ReactComponent as Listen } from "../../assets/svg/listener.svg";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Landing = () => {
             <Scroll />
           </div>
         </div>
-        <div className="w-full bg-black flex p-10 -mt-40 justify-center gap-5">
+        <div className="w-full bg-black flex p-10 -mt-20 justify-center gap-5">
           <div
             className="w-full cursor-pointer bg-black h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
             onClick={() => navigate("/registration-artist")}
@@ -47,12 +48,12 @@ const Landing = () => {
             onClick={() => navigate("/registration-listener")}
           >
             <div className="flex justify-center mt-20 mb-10">
-              <Mic />
+              <Listen />
             </div>
-            <div className="font-semibold my-5 text-xl">For Artists</div>
+            <div className="font-semibold my-5 text-xl">For Listener</div>
             <div className="mb-20">
-              Elevate your earnings (Royalty Transparency), Craft your <br />
-              digital identity, and engage your fanbase.
+              Seamlessly engage and support your favorites. <br />
+              Get access to exclusive content.
             </div>
           </div>
         </div>

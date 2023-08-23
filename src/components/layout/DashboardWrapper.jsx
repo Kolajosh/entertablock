@@ -6,7 +6,7 @@ import Sidebar from "../sidebar/Sidebar";
 const DashboardWrapper = ({ children }) => {
   return (
     <ReactSuspenceWrapper>
-      <div className="min-h-screen bg-[#EEF0FA] w-full pb-20 overflow-scroll">
+      <div className="min-h-screen bg-[#191919] w-full pb-20 overflow-scroll">
         <div className="mx-auto">
           <div className="">
             <Navbar />

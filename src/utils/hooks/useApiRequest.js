@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const makeRequest = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "https://entertablock-backend.vercel.app/api",
   // baseURL: process.env.REACT_APP_ALT_BASE_URL,
   timeout: 1 * 60 * 1000,
 });

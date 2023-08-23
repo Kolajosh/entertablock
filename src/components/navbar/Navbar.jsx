@@ -1,40 +1,75 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-// import profile from "../../assets/img/profile.png";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { ReactComponent as Logo } from "../../assets/svg/Logo.svg";
+import { ReactComponent as Icon } from "../../assets/svg/navbarIcon.svg";
 import { ReactComponent as Notification } from "../../assets/svg/Notification.svg";
 import { ReactComponent as Home } from "../../assets/svg/Home.svg";
 import { CustomButton } from "../buttons/CustomButton";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
-      <div className="bg-white pt-5 flex flex-wrap justify-between px-5 pb-3 items-center">
+      <div className="bg-[#191919] pt-5 flex text-white font-jarkata flex-wrap justify-between mx-20 pb-3 items-center">
         <div
           onClick={() => navigate("/")}
           className="font-poppins cursor-pointer text-xl text-[#45464E] font-medium"
         >
-          <div>Dashboard</div>
-        </div>
-        <div className="flex gap-5 items-center">
-          <select className="px-4 py-2 font-inter text-sm border-none rounded-xl bg-[#FEF5EA]">
-            <option value="shop">Nanny's Shop</option>
-            <option value="shop">Nanny's Shop</option>
-            <option value="shop">Nanny's Shop</option>
-            <option value="shop">Nanny's Shop</option>
-          </select>
           <div>
-            <Notification />
-          </div>
-          <div>
-            {/* <img src={profile} alt="" /> */}
+            <Logo />
           </div>
         </div>
-      </div>
-      <hr />
-      <div className="px-5 bg-white py-2">
-        <Home />
+        <div className="flex text-[#939393] p-5 border border-[#2F2F2F] rounded-full gap-5 items-center">
+          <div
+            className={`${
+              location?.pathname === "/dashboard/overview" && "text-[#FF0202]"
+            }`}
+            onClick={() => navigate("/dashboard/overview")}
+          >
+            Overview
+          </div>
+          <div
+            className={`${
+              location?.pathname === "/dashboard/music" && "text-[#FF0202]"
+            }`}
+            onClick={() => navigate("/dashboard/music")}
+          >
+            Music
+          </div>
+          <div
+            className={`${
+              location?.pathname === "/dashboard/analytics" && "text-[#FF0202]"
+            }`}
+            onClick={() => navigate("/dashboard/analytics")}
+          >
+            Analytics
+          </div>
+          <div
+            className={`${
+              location?.pathname === "/dashboard/earnings" && "text-[#FF0202]"
+            }`}
+            onClick={() => navigate("/dashboard/earnings")}
+          >
+            Earnings
+          </div>
+          <div
+            className={`${
+              location?.pathname === "/dashboard/profile" && "text-[#FF0202]"
+            }`}
+            onClick={() => navigate("/dashboard/profile")}
+          >
+            Profile
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div>
+            <Icon />
+          </div>
+          <div>Idan</div>
+          <div className="rotate-180">^</div>
+        </div>
       </div>
     </>
   );
