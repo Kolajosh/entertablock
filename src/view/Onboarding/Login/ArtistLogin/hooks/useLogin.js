@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import useApiRequest from "../../../../../utils/hooks/useApiRequest";
-import { userRegister } from "../../../../../utils/apiURLs/requests";
+import { userLogin, userRegister } from "../../../../../utils/apiURLs/requests";
 import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import { entertaABI, entertaContract } from "../../../../../constant/constants";
 
-const useRegistration = () => {
+const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const makeRequest = useApiRequest();
   const navigate = useNavigate();
 
-  const handleRegister = async (datapayload) => {
+  const handleLogin = async (datapayload) => {
     setLoading(true);
     const payload = { ...datapayload };
 
     try {
-      const response = await makeRequest.post(userRegister, payload);
+      const response = await makeRequest.post(userLogin, payload);
       console.log(response?.data?.token);
       setLoading(false);
       if (response?.status === 200) {
@@ -32,7 +32,7 @@ const useRegistration = () => {
       setLoading(false);
     }
   };
-  return { handleRegister, loading };
+  return { handleLogin, loading };
 };
 
-export default useRegistration;
+export default useLogin;

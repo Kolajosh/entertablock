@@ -17,8 +17,8 @@ const useApiRequest = () => {
       if (!userToken) return config;
 
       if (userToken) {
-        config.headers.Authorization = "Bearer";
-        config.headers["alat-token"] = userToken;
+        config.headers.Authorization = `Bearer ${userToken}`;
+        config.headers["x-auth-token"] = userToken;
       }
       return config;
     },

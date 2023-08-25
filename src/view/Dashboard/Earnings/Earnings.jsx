@@ -1,23 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardWrapper from "../../../components/layout/DashboardWrapper";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
 import { PieChart } from "react-minimal-pie-chart";
+import Meta from "../../../assets/img/meta.png";
+import Coin from "../../../assets/img/coinbase.png";
 import { CustomButton } from "../../../components/buttons/CustomButton";
+import { entertaABI, entertaContract } from "../../../constant/constants";
+import Web3 from "web3";
+import CenterModal from "../../../components/Modal/CenterModal";
 
 const Earnings = () => {
-  const data = [
-    { name: "Jan", uv: 550, pv: 2400, amt: 2400 },
-    { name: "Feb", uv: 800, pv: 1398, amt: 2210 },
-    { name: "Mar ", uv: 900, pv: 9800, amt: 2290 },
-    { name: "Apr ", uv: 400, pv: 3908, amt: 2000 },
-    { name: "May ", uv: 1000, pv: 4800, amt: 2181 },
-    { name: "Jun ", uv: 300, pv: 3800, amt: 2500 },
-    { name: "Jul ", uv: 700, pv: 4300, amt: 2100 },
-    { name: "Sep ", uv: 500, pv: 3200, amt: 2400 },
-    { name: "Oct ", uv: 600, pv: 9800, amt: 2290 },
-    { name: "Nov ", uv: 200, pv: 3908, amt: 2000 },
-    { name: "Dec ", uv: 100, pv: 4800, amt: 2181 },
-  ];
+  const web3 = new Web3(window.ethereum);
+  const wallet = localStorage?.getItem("wallet");
+  const EntertaBlockABI = entertaABI.abi;
+  const EntertacontractAddress = entertaContract;
+
+  const entertaContractBind = new web3.eth.Contract(
+    EntertaBlockABI,
+    EntertacontractAddress
+  );
+
+  const isWeb3Available = () => {
+    return Boolean(window.ethereum);
+  };
+
+  const [showModal, toggleShowModal] = useState(false);
+  const [showWalletModal, toggleWalletShowModal] = useState(false);
+
+  const connectWithMetaMask = async () => {
+    if (isWeb3Available()) {
+      // Check if MetaMask is the selected wallet
+      if (window.ethereum.isMetaMask) {
+        await window.ethereum
+          .enable() // Force MetaMask prompt
+          .then(async (accounts) => {
+            // Handle successful connection
+            // Store the selected account address for future use
+            const selectedWalletAccount = accounts[0];
+            // setSelectedAccount(selectedWalletAccount);
+            localStorage.setItem("wallet", selectedWalletAccount);
+            toggleWalletShowModal(false);
+
+            // Call the registerUser function here
+          })
+          .catch((error) => {
+            // Handle connection error
+            console.error("MetaMask connection error:", error);
+          });
+      } else {
+        // MetaMask not detected
+        console.error("MetaMask not detected.");
+      }
+    } else {
+      // Web3 provider not available
+      console.error("Web3 provider not found.");
+    }
+  };
+
+  // to hide characters
+  function hideCharacters(str) {
+    if (str.length <= 9) {
+      return str; // Return the original string if it's 9 characters or less
+    }
+
+    const firstFive = str.slice(0, 5); // Get the first 5 characters
+    const lastFour = str.slice(-4); // Get the last 4 characters
+
+    const hiddenCharacters = "..."; // Hide the middle characters with asterisks
+
+    return firstFive + hiddenCharacters + lastFour; // Concatenate the parts and return the result
+  }
 
   return (
     <>
@@ -37,12 +89,22 @@ const Earnings = () => {
           <div className="col-span-1 rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 p-5 mt-10 text-white font-jarkata">
             <div className="text-xl font-semibold">Wallet</div>
             <hr className="border border-[#2F2F2F]" />
-            <div className="flex flex-col justify-center items-center">
-              <div>Receive your royalties and earning with ease</div>
-              <div>
-                <CustomButton labelText={"Connect Wallet"} variant="primary" />
+            {wallet !== "" ? (
+              <div className="">
+                <div>Wallet Connected, Receiving Royalties here:</div>
+                {hideCharacters(wallet)}
               </div>
-            </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center">
+                <div>Receive your royalties and earning with ease</div>
+                <div onClick={() => toggleWalletShowModal(true)}>
+                  <CustomButton
+                    labelText={"Connect Wallet"}
+                    variant="primary"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="col-span-2 p-5 rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 mt-10 text-white font-jarkata ">
@@ -128,6 +190,34 @@ const Earnings = () => {
           </div>
         </div>
       </DashboardWrapper>
+
+      {showWalletModal && (
+        <CenterModal title="Connect Wallet">
+          <div className="w-full flex gap-5 justify-center">
+            <div
+              className="border cursor-pointer p-5 rounded-xl"
+              style={{ width: "100px" }}
+              onClick={() => connectWithMetaMask()}
+            >
+              <img
+                src={Meta}
+                className="object-contain w-full h-full"
+                alt="meta"
+              />
+            </div>
+            <div
+              className="border cursor-pointer p-5 rounded-xl"
+              style={{ width: "100px" }}
+            >
+              <img
+                src={Coin}
+                className="object-contain w-full h-full"
+                alt="coin"
+              />
+            </div>
+          </div>
+        </CenterModal>
+      )}
     </>
   );
 };

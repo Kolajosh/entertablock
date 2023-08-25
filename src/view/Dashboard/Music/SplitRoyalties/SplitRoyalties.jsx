@@ -5,14 +5,29 @@ import { ReactComponent as Single } from "../../../../assets/svg/single.svg";
 import { CustomButton } from "../../../../components/buttons/CustomButton";
 import CenterModal from "../../../../components/Modal/CenterModal";
 import { TextInput } from "../../../../components/reusables/TextInput";
-import DragDrop from "../../../../components/DnD/DragDrop";
-import DragDropMp3 from "../../../../components/DnD/DragDropMp3";
+import Web3 from "web3";
+import { entertaABI, entertaContract } from "../../../../constant/constants";
 
 const SplitRoyalties = () => {
+  const web3 = new Web3(window.ethereum);
+
+  const EntertaBlockABI = entertaABI.abi;
+  const EntertacontractAddress = entertaContract;
+
+  const entertaContractBind = new web3.eth.Contract(
+    EntertaBlockABI,
+    EntertacontractAddress
+  );
+
   const [showModal, toggleShowModal] = useState(false);
+  const wallet = localStorage?.getItem("wallet");
   const [collaborators, setCollaborators] = useState([
-    { name: "Ogidan Emmanuel", percentage: "100" }, // Initial collaborator
+    { name: wallet, percentage: "100" }, // Initial collaborator
   ]);
+
+  console.log(collaborators);
+
+  const filteredNames = collaborators.map((collaborator) => collaborator.name);
 
   const handleAddCollaborator = () => {
     // Add a new collaborator with empty percentage
@@ -29,6 +44,29 @@ const SplitRoyalties = () => {
     const newCollaborators = [...collaborators];
     newCollaborators.splice(index, 1);
     setCollaborators(newCollaborators);
+  };
+
+  const handleCreateCollaboration = async () => {
+    try {
+      // Assume you have collaborators in an array, modify as per your use case
+      const collaboratorsArray = [...filteredNames];
+      console.log(collaboratorsArray);
+
+      const accounts = await web3.eth.getAccounts();
+      const owner = accounts[0]; // This should be the owner's Ethereum address
+
+      const contractFunction =
+        entertaContractBind.methods.createCollaboration(collaboratorsArray);
+      const gas = await contractFunction.estimateGas({ from: owner });
+
+      await contractFunction.send({ from: owner, gas });
+
+      // Refresh collaborators list
+      setCollaborators([...collaborators, ...collaboratorsArray]);
+    } catch (error) {
+      console.error("Error creating collaboration:", error);
+      alert("Artist not registered")
+    }
   };
 
   return (
@@ -112,7 +150,9 @@ const SplitRoyalties = () => {
               </div>
             </div>
             <div className="flex mb-10 gap-3 mt-3">
-              <CustomButton labelText={"Finish"} variant="primary" />
+              <div onClick={() => handleCreateCollaboration()}>
+                <CustomButton labelText={"Finish"} variant="primary" />
+              </div>
               <button className="text-sm border rounded-full p-4">
                 Cancel
               </button>

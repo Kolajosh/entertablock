@@ -6,7 +6,7 @@ import { ReactComponent as Notification } from "../../assets/svg/Notification.sv
 import { ReactComponent as Home } from "../../assets/svg/Home.svg";
 import { CustomButton } from "../buttons/CustomButton";
 
-const Navbar = () => {
+const NavbarListener = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const firstName = localStorage?.getItem("firstName");
@@ -25,50 +25,45 @@ const Navbar = () => {
         <div className="flex text-[#939393] p-5 border border-[#2F2F2F] rounded-full gap-5 items-center">
           <div
             className={`${
-              location?.pathname === "/dashboard/overview" && "text-[#FF0202]"
+              location?.pathname === "/listener/dashboard/overview" &&
+              "text-[#FF0202]"
             }`}
-            onClick={() => navigate("/dashboard/overview")}
+            onClick={() => navigate("/listener/dashboard/overview")}
           >
             Overview
           </div>
           <div
             className={`${
-              location?.pathname === "/dashboard/music" && "text-[#FF0202]"
+              location?.pathname === "/listener/dashboard/fav" &&
+              "text-[#FF0202]"
             }`}
-            onClick={() => navigate("/dashboard/music")}
+            onClick={() => navigate("/listener/dashboard/fav")}
           >
-            Music
+            Favorites
           </div>
           <div
             className={`${
-              location?.pathname === "/dashboard/analytics" && "text-[#FF0202]"
+              location?.pathname === "/listener/dashboard/tokens" &&
+              "text-[#FF0202]"
             }`}
-            onClick={() => navigate("/dashboard/analytics")}
+            onClick={() => navigate("/listener/dashboard/tokens")}
           >
-            Analytics
+            Tokens
           </div>
           <div
             className={`${
               location?.pathname === "/dashboard/earnings" && "text-[#FF0202]"
             }`}
-            onClick={() => navigate("/dashboard/earnings")}
+            // onClick={() => navigate("/dashboard/earnings")}
           >
             Earnings
-          </div>
-          <div
-            className={`${
-              location?.pathname === "/dashboard/profile" && "text-[#FF0202]"
-            }`}
-            onClick={() => navigate("/dashboard/profile")}
-          >
-            Profile
           </div>
         </div>
         <div className="flex items-center gap-3">
           <div>
             <Icon />
           </div>
-          <div>{firstName}</div>
+          {/* <div>{firstName}</div> */}
           <div className="rotate-180">^</div>
         </div>
       </div>
@@ -76,4 +71,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarListener;

@@ -11,6 +11,9 @@ import SplitRoyalties from "../view/Dashboard/Music/SplitRoyalties/SplitRoyaltie
 import Analytics from "../view/Dashboard/Analytics/Analytics";
 import Earnings from "../view/Dashboard/Earnings/Earnings";
 import Profile from "../view/Dashboard/Profile/Profile";
+import ListenerOverview from "../view/Dashboard/Listener/Overview";
+import Favorites from "../view/Dashboard/Listener/Favorites";
+import Tokens from "../view/Dashboard/Listener/Token/Tokens";
 // import Conversation from "../view/Conversation/Conversation";
 
 const AppRoutes = () => {
@@ -26,6 +29,9 @@ const AppRoutes = () => {
       <Route path="/dashboard/profile" element={<Profile />} />
       <Route path="/dashboard/music" element={<Music />} />
       <Route path="/dashboard/music/add-music" element={<AddMusic />} />
+      <Route path="/listener/dashboard/overview" element={<ListenerOverview />} />
+      <Route path="/listener/dashboard/fav" element={<Favorites />} />
+      <Route path="/listener/dashboard/tokens" element={<Tokens />} />
       <Route
         path="/dashboard/music/split-royalties"
         element={<SplitRoyalties />}

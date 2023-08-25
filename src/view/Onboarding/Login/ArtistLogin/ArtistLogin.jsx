@@ -5,17 +5,27 @@ import { TextInput } from "../../../../components/reusables/TextInput";
 import { CustomButton } from "../../../../components/buttons/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import useLogin from "./hooks/useLogin";
 
 const ArtistLogin = () => {
+  const { handleLogin, loading } = useLogin();
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      emailAddress: "",
+      email: "",
       password: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log(values);
+      await handleLogin({
+        ...values,
+      });
     },
   });
 
-  const { handleChange, values } = formik;
+  const { handleChange, values, handleSubmit } = formik;
   return (
     <>
       <div className="grid grid-cols-1 font-jarkata md:grid-cols-2">
@@ -33,23 +43,27 @@ const ArtistLogin = () => {
         </div>
 
         <div className="w-full text-left h-screen flex justify-center items-center text-white bg-[#1E1E1E]">
-          <form action="" className="w-7/12 space-y-5">
+          <div action="" className="w-7/12 space-y-5">
             <div className="text-2xl font-bold">Hello Artist! Login</div>
             <div>
               <TextInput
+                name="email"
                 label="Email Address"
                 placeHolder="Email Address"
                 handleChange={handleChange}
+                value={values?.email}
               />
             </div>
             <div>
               <TextInput
+                name="password"
                 type="password"
                 label="Password"
                 handleChange={handleChange}
+                value={values?.password}
               />
             </div>
-            <div>
+            <div onClick={() => handleSubmit()}>
               <CustomButton labelText={"Login"} buttonVariant="primary" />
             </div>
             <div>
@@ -62,7 +76,7 @@ const ArtistLogin = () => {
                 Register
               </span>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

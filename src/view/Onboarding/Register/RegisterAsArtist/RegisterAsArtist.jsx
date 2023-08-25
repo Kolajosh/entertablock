@@ -22,7 +22,7 @@ const RegisterAsArtist = () => {
     onSubmit: async (values) => {
       console.log(values);
       await handleRegister({
-        values,
+        ...values,
       });
     },
   });
