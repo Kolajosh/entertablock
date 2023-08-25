@@ -7,7 +7,17 @@ import CenterModal from "../../../components/Modal/CenterModal";
 import Meta from "../../../assets/img/meta.png";
 import Coin from "../../../assets/img/coinbase.png";
 import Web3 from "web3";
-import { entertaABI, entertaContract } from "../../../constant/constants";
+import {
+  artistManagement,
+  artistManagement1Contract,
+  artistManagementContract,
+  backupABI,
+  backupContract,
+  entertaABI,
+  entertaContract,
+  newABI,
+  newContract,
+} from "../../../constant/constants";
 import useGetReleases from "./hooks/useGetReleases";
 import { useNavigate } from "react-router-dom";
 
@@ -21,27 +31,48 @@ const Overview = () => {
     handleReleases();
   }, []);
 
-  const EntertaBlockABI = entertaABI.abi;
-  const EntertacontractAddress = entertaContract;
+  //   const EntertaBlockABI = entertaABI.abi;
+  //   const EntertacontractAddress = entertaContract;
+
+  //   const ArtistManagementABI = artistManagement.abi;
+  const newAbi = newABI.abi;
+
+  //   const ArtistManagementAddress = artistManagementContract;
+  //   const ArtistManagementAddress1 = artistManagement1Contract;
+  const newContractAddy = newContract;
+
+  const newBind = new web3.eth.Contract(newAbi, newContractAddy);
+
+  //   const artistManagementBind = new web3.eth.Contract(
+  //     ArtistManagementABI,
+  //     ArtistManagementAddress1
+  //   );
+
+  const backupNewABI = backupABI.abi;
+  const backupContractAddy = backupContract;
+
+  const backupBind = new web3.eth.Contract(backupNewABI, backupContractAddy);
+
   const wallet = localStorage?.getItem("wallet");
   const firstName = localStorage?.getItem("firstName");
   const password = localStorage?.getItem("password");
   const lastName = localStorage?.getItem("lastName");
-  const email = localStorage?.getItem("email");
+  const emailAddress = localStorage?.getItem("email");
   const stageName = localStorage?.getItem("stageName");
 
-  const entertaContractBind = new web3.eth.Contract(
-    EntertaBlockABI,
-    EntertacontractAddress
-  );
+  //   const entertaContractBind = new web3.eth.Contract(
+  //     EntertaBlockABI,
+  //     EntertacontractAddress
+  //   );
 
   const registerUser = async () => {
     try {
-      const receipt = await entertaContractBind.methods
-        .registerArtist(email, password, firstName, lastName, stageName)
+      const receipt = await backupBind.methods
+        .registerArtist(emailAddress, password, firstName, lastName, stageName)
         .send({ from: localStorage?.getItem("wallet") }); // Replace with the sender's address
       console.log("Transaction receipt:", receipt);
       if (receipt) {
+        alert("Success");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -77,7 +108,7 @@ const Overview = () => {
             toggleWalletShowModal(false);
 
             // Call the registerUser function here
-            await registerUser();
+            // await registerUser();
           })
           .catch((error) => {
             // Handle connection error

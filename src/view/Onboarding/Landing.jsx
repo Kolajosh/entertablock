@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Hero from "../../assets/img/landing.png";
 import { ReactComponent as Logo } from "../../assets/svg/Logo.svg";
@@ -8,6 +8,27 @@ import { ReactComponent as Listen } from "../../assets/svg/listener.svg";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const disconnectMetaMask = async () => {
+    if (window.ethereum && window.ethereum.selectedAddress) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_requestPermissions",
+          params: [{ eth_accounts: {} }],
+        });
+        console.log("Disconnected from MetaMask");
+        // Optionally, you can reset your application's state or perform other actions here
+      } catch (error) {
+        console.error("Error disconnecting from MetaMask:", error);
+      }
+    } else {
+      console.log("MetaMask not detected or already disconnected");
+    }
+  };
+
+  useEffect(() => {
+    // disconnectMetaMask();
+    localStorage.clear();
+  }, []);
 
   return (
     <>

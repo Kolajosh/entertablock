@@ -31,14 +31,14 @@ const Navbar = () => {
           >
             Overview
           </div>
-          <div
+          {/* <div
             className={`${
               location?.pathname === "/dashboard/music" && "text-[#FF0202]"
             }`}
             onClick={() => navigate("/dashboard/music")}
           >
             Music
-          </div>
+          </div> */}
           <div
             className={`${
               location?.pathname === "/dashboard/analytics" && "text-[#FF0202]"

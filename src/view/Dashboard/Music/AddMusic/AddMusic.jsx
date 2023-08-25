@@ -13,7 +13,15 @@ import { sendRelease, uploadFile } from "../../../../utils/apiURLs/requests";
 import dayjs from "dayjs";
 import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
-import { entertaABI, entertaContract } from "../../../../constant/constants";
+import {
+  artistManagement,
+  artistManagement1Contract,
+  artistManagementContract,
+  entertaABI,
+  entertaContract,
+  newABI,
+  newContract,
+} from "../../../../constant/constants";
 
 const AddMusic = () => {
   const web3 = new Web3(window.ethereum);
@@ -26,6 +34,21 @@ const AddMusic = () => {
     EntertacontractAddress
   );
 
+  const ArtistManagementABI = artistManagement.abi;
+
+  const ArtistManagementAddress = artistManagementContract;
+  const ArtistManagementAddress1 = artistManagement1Contract;
+
+  const artistManagementBind = new web3.eth.Contract(
+    ArtistManagementABI,
+    ArtistManagementAddress1
+  );
+
+  const newAbi = newABI.abi;
+  const newContractAddy = newContract;
+
+  const newBind = new web3.eth.Contract(newAbi, newContractAddy);
+
   // Function to set work metadata
   async function setWorkMetadata(work, releaseDate, description, coverArtUrl) {
     try {
@@ -33,7 +56,7 @@ const AddMusic = () => {
       const accounts = await web3.eth.getAccounts();
 
       // Call the setWorkMetadata function
-      const txReceipt = await entertaContractBind.methods
+      const txReceipt = await newBind.methods
         .setWorkMetadata(work, releaseDate, description, coverArtUrl)
         .send({ from: accounts[0] });
 
@@ -273,12 +296,12 @@ const AddMusic = () => {
               <div
                 onClick={() => {
                   UploadImage();
-                  setWorkMetadata(
-                    "Single",
-                    values?.releaseDate,
-                    values?.title,
-                    values?.coverImage
-                  );
+                  //   setWorkMetadata(
+                  //     "Single",
+                  //     dayjs(values?.releaseDate).format("YYYY-MM-DD"),
+                  //     values?.title,
+                  //     values?.coverImage
+                  //   );
                   UploadSong();
                 }}
               >
