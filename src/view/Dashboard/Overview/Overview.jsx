@@ -95,12 +95,12 @@ const Overview = () => {
 
   // to hide characters
   function hideCharacters(str) {
-    if (str.length <= 9) {
+    if (str?.length <= 9) {
       return str; // Return the original string if it's 9 characters or less
     }
 
-    const firstFive = str.slice(0, 5); // Get the first 5 characters
-    const lastFour = str.slice(-4); // Get the last 4 characters
+    const firstFive = str?.slice(0, 5); // Get the first 5 characters
+    const lastFour = str?.slice(-4); // Get the last 4 characters
 
     const hiddenCharacters = "..."; // Hide the middle characters with asterisks
 
