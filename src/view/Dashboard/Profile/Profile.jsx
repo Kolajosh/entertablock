@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <>
       <DashboardWrapper>
-        <div className="mx-20 font-jarkata">
+        <div className="mx-10 md:mx-20 font-jarkata">
           <div className="rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 p-5 mt-10 text-white font-jarkata">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-5">
@@ -31,7 +31,7 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-5">
+              <div className="hidden md:flex flex-col md:flex-row items-center gap-5">
                 <Apple />
                 <Yt />
                 <Spotify />
@@ -40,7 +40,7 @@ const Profile = () => {
           </div>
 
           <div className="rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 p-5 mt-5 text-white font-jarkata">
-            <div className="flex gap-10">
+            <div className="flex flex-col md:flex-row gap-10">
               <div
                 className="cursor-pointer"
                 onClick={() => setSelectedTab("about")}

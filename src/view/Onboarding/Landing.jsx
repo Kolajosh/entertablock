@@ -33,12 +33,16 @@ const Landing = () => {
   return (
     <>
       <div className="relative bg-black text-white font-jarkata w-full h-screen">
-        <img src={Hero} className="w-full object-cover" alt="gero" />
-        <div className="absolute mt-10 ml-20 top-0">
+        <img
+          src={Hero}
+          className="w-full h-[572px] md:h-auto object-cover"
+          alt="gero"
+        />
+        <div className="absolute mt-10 ml-10 md:ml-20 top-0">
           <div>
             <Logo />
           </div>
-          <div className="mt-40 text-6xl font-bold">
+          <div className="mt-10 md:mt-40 text-2xl md:text-6xl font-bold">
             Unleashing Potentials, <br />
             Connecting Hearts.
           </div>
@@ -49,9 +53,9 @@ const Landing = () => {
             <Scroll />
           </div>
         </div>
-        <div className="w-full bg-black flex p-10 -mt-20 justify-center gap-5">
+        <div className="w-full bg-black grid grid-cols-1 md:grid-cols-2 p-10 -mt-20 justify-center gap-5">
           <div
-            className="w-full cursor-pointer bg-black h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
+            className="w-full cursor-pointer bg-black h-[372px] md:h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
             onClick={() => navigate("/registration-artist")}
           >
             <div className="flex justify-center mt-20 mb-10">
@@ -65,7 +69,7 @@ const Landing = () => {
           </div>
 
           <div
-            className="w-full cursor-pointer bg-black h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
+            className="w-full cursor-pointer bg-black h-[372px] md:h-[572px] flex flex-col justify-center border-[#434141] border rounded-lg text-center"
             onClick={() => navigate("/registration-listener")}
           >
             <div className="flex justify-center mt-20 mb-10">

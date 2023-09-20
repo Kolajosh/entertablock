@@ -142,7 +142,7 @@ const Overview = () => {
     <>
       <DashboardWrapper>
         {releases?.length <= 0 ? (
-          <div className="h-[573px] bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 flex flex-col justify-center items-center mt-10 text-white rounded-3xl font-jarkata mx-20">
+          <div className="h-[573px] bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 flex flex-col justify-center items-center mt-10 text-white rounded-3xl font-jarkata mx-10 md:mx-20">
             <div className="flex flex-col items-center justify-center space-y-3">
               <div>
                 <Music />
@@ -158,7 +158,7 @@ const Overview = () => {
             </div>
           </div>
         ) : (
-          <div className="mx-20 grid gap-5 grid-cols-4">
+          <div className="mx-10 md:mx-20 grid gap-5 grid-cols-1 md:grid-cols-4">
             <div className="w-full h-auto col-span-2 bg-[#1E1E1E] p-5 border border-[#2F2F2F] space-y-5 mt-10 text-white rounded-3xl font-jarkata ">
               <div className="flex justify-between items-center">
                 <div className="text-xl font-semibold">Top Releases</div>

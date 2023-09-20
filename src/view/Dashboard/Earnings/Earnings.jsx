@@ -74,7 +74,7 @@ const Earnings = () => {
   return (
     <>
       <DashboardWrapper>
-        <div className="text-white flex justify-between items-center mt-10 mx-20">
+        <div className="text-white flex justify-between items-center mt-10 mx-10 md:mx-20">
           <div className="font-semibold text-2xl font-jarkata">Earnings</div>
           <div className="space-x-3">
             <select className="text-white py-2 px-2 rounded-full items-center bg-[#2F2F2F] border border-[#434141]">
@@ -85,7 +85,7 @@ const Earnings = () => {
             </select>
           </div>
         </div>
-        <div className="mx-20 font-jarkata grid gap-5 grid-cols-1 md:grid-cols-3">
+        <div className="mx-10 md:mx-20 font-jarkata grid gap-5 grid-cols-1 md:grid-cols-3">
           <div className="col-span-1 rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 p-5 mt-10 text-white font-jarkata">
             <div className="text-xl font-semibold">Wallet</div>
             <hr className="border border-[#2F2F2F]" />
@@ -158,7 +158,7 @@ const Earnings = () => {
           </div>
         </div>
 
-        <div className="mx-20 font-jarkata grid gap-5 grid-cols-1 md:grid-cols-2">
+        <div className="mx-10 md:mx-20 font-jarkata grid gap-5 grid-cols-1 md:grid-cols-2">
           <div className="col-span-1 p-5 rounded-3xl w-full h-auto bg-[#1E1E1E] border border-[#2F2F2F] space-y-5 mt-10 text-white font-jarkata ">
             <div className="text-xl font-semibold">Token</div>
             <hr className="border border-[#2F2F2F]" />

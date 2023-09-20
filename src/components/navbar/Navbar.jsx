@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-[#191919] pt-5 flex text-white font-jarkata flex-wrap justify-between mx-20 pb-3 items-center">
+      <div className="bg-[#191919] pt-5 flex text-white font-jarkata flex-wrap justify-between mx-10 mb:mx-20 pb-3 items-center">
         <div
           onClick={() => navigate("/")}
           className="font-poppins cursor-pointer text-xl text-[#45464E] font-medium"
@@ -31,14 +31,6 @@ const Navbar = () => {
           >
             Overview
           </div>
-          {/* <div
-            className={`${
-              location?.pathname === "/dashboard/music" && "text-[#FF0202]"
-            }`}
-            onClick={() => navigate("/dashboard/music")}
-          >
-            Music
-          </div> */}
           <div
             className={`${
               location?.pathname === "/dashboard/analytics" && "text-[#FF0202]"

@@ -29,7 +29,7 @@ const ArtistLogin = () => {
   return (
     <>
       <div className="grid grid-cols-1 font-jarkata md:grid-cols-2">
-        <div className=" relative text-white h-screen">
+      <div className="hidden md:block relative text-white h-screen">
           <img src={Hero} className="h-screen w-full object-cover" alt="hero" />
           <div className="absolute mt-10 ml-20 top-0">
             <div>
